@@ -12,15 +12,17 @@ public class Main {
         }
     }
     public static void judgeAll(String in){
-        while(in.charAt(0)==' '||in.charAt(0)=='\t'||in.charAt(0)=='\n'){
-            in=in.substring(1);
-            if(in.length()==0)
-                break;
-        }
-        if(!(in.length()>0))
+        if(in.length()==0)
             return;
         if(in.replace(" ", "").equals(""))
             return;
+        if(in.replace("\t", "").equals(""))
+            return;
+        while(in.charAt(0)==' '||in.charAt(0)=='\t'||in.charAt(0)=='\n'){
+            if(in.length()<=1)
+                break;
+            in=in.substring(1);
+        }
         if(Character.isDigit(in.charAt(0))){
             judgeNumber(in);
         }
