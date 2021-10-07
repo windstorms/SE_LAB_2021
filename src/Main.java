@@ -14,6 +14,8 @@ public class Main {
     public static void judgeAll(String in){
         if(!(in.length()>0))
             return;
+        if(in.replace(" ", "").equals(""))
+            return;
         if(Character.isDigit(in.charAt(0))){
             judgeNumber(in);
         }
