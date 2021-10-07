@@ -37,7 +37,7 @@ public class Main {
         System.out.println("Number("+out+")");
         if(i<=in.length()-1){
             String temp = in.substring(i);
-            judgeAll(temp);
+            judgeAll(temp.trim());
         }
     }
     public static void judgeWord(String in){
@@ -72,69 +72,69 @@ public class Main {
         }
         if(i<=in.length()-1){
             String temp = in.substring(i);
-            judgeAll(temp);
+            judgeAll(temp.trim());
         }
     }
     public static void judgeOther(String in){
         if(in.startsWith("==")){
             System.out.println("Eq");
             if(in.length()>2)
-                judgeAll(in.substring(2));
+                judgeAll(in.substring(2).trim());
         }
         else if(in.charAt(0)=='='){
             System.out.println("Assign");
             if(in.length()>1)
-                judgeAll(in.substring(1));
+                judgeAll(in.substring(1).trim());
         }
         else if(in.charAt(0)==';'){
             System.out.println("Semicolon");
             if(in.length()>1)
-                judgeAll(in.substring(1));
+                judgeAll(in.substring(1).trim());
         }
         else if(in.charAt(0)=='('){
             System.out.println("LPar");
             if(in.length()>1)
-                judgeAll(in.substring(1));
+                judgeAll(in.substring(1).trim());
         }
         else if(in.charAt(0)==')'){
             System.out.println("RPar");
             if(in.length()>1)
-                judgeAll(in.substring(1));
+                judgeAll(in.substring(1).trim());
         }
         else if(in.charAt(0)=='{'){
             System.out.println("LBrace");
             if(in.length()>1)
-                judgeAll(in.substring(1));
+                judgeAll(in.substring(1).trim());
         }
         else if(in.charAt(0)=='}'){
             System.out.println("RBrace");
             if(in.length()>1)
-                judgeAll(in.substring(1));
+                judgeAll(in.substring(1).trim());
         }
         else if(in.charAt(0)=='+'){
             System.out.println("Plus");
             if(in.length()>1)
-                judgeAll(in.substring(1));
+                judgeAll(in.substring(1).trim());
         }
         else if(in.charAt(0)=='*'){
             System.out.println("Mult");
             if(in.length()>1)
-                judgeAll(in.substring(1));
+                judgeAll(in.substring(1).trim());
         }
         else if(in.charAt(0)=='/'){
             System.out.println("Div");
             if(in.length()>1)
-                judgeAll(in.substring(1));
+                judgeAll(in.substring(1).trim());
         }
         else if(in.charAt(0)=='>'){
             System.out.println("Gt");
             if(in.length()>1)
-                judgeAll(in.substring(1));
+                judgeAll(in.substring(1).trim());
         }
         else if(in.charAt(0)=='<'){
             System.out.println("Lt");
             if(in.length()>1)
-                judgeAll(in.substring(1));
+                judgeAll(in.substring(1).trim());
         }
         else {
             System.out.println("Err");
