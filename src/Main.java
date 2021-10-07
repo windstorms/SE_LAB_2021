@@ -73,7 +73,12 @@ public class Main {
         }
     }
     public static void judgeOther(String in){
-        if(in.charAt(0)=='='){
+        if(in.startsWith("==")){
+            System.out.println("Eq");
+            if(in.length()>2)
+                judgeAll(in.substring(2));
+        }
+        else if(in.charAt(0)=='='){
             System.out.println("Assign");
             if(in.length()>1)
                 judgeAll(in.substring(1));
@@ -129,15 +134,8 @@ public class Main {
                 judgeAll(in.substring(1));
         }
         else {
-            if(in.startsWith("==")){
-                System.out.println("Eq");
-                if(in.length()>2)
-                    judgeAll(in.substring(2));
-            }
-            else {
-                System.out.println("Err");
-                System.exit(0);
-            }
+            System.out.println("Err");
+            System.exit(0);
         }
     }
 }
