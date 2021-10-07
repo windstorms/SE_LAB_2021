@@ -12,6 +12,11 @@ public class Main {
         }
     }
     public static void judgeAll(String in){
+        while(in.charAt(0)==' '||in.charAt(0)=='\t'||in.charAt(0)=='\n'){
+            in=in.substring(1);
+            if(in.length()==0)
+                break;
+        }
         if(!(in.length()>0))
             return;
         if(in.replace(" ", "").equals(""))
