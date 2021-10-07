@@ -12,7 +12,8 @@ public class Main {
         }
     }
     public static void judgeAll(String in){
-        //System.out.println(in);
+        if(!(in.length()>0))
+            return;
         if(Character.isDigit(in.charAt(0))){
             judgeNumber(in);
         }
