@@ -3,149 +3,62 @@ import java.util.*;
 public class Main {
     public static Scanner scanner =  new Scanner(System.in);
     public static void main(String[] args) {
-        while(scanner.hasNext()){
-            String input = scanner.nextLine();
-            String[] toks = input.trim().split(" ");
-            for (String tok : toks) {
-                judgeAll(tok);
-            }
+        String s = scanner.nextLine();
+        s=s.replace(" ","");
+        s=s.replace("\t","");
+        //System.out.println(s);
+        if(!(s.equals("intmain(){"))){
+            System.exit(1);
         }
+        System.out.println("define dso_local i32 @main(){");
+        if(!scanner.hasNext()){
+            System.exit(1);
+        }
+        s = scanner.nextLine();
+        String[] arg = s.trim().split(" ");
+        if(!(arg[0].trim().equals("return"))){
+            System.exit(1);
+        }
+        if(!judgeNumber(arg[1].trim())){
+            System.exit(1);
+        }
+        System.out.println("    ret i32 "+arg[1].substring(0,arg[1].length()-1));
+        if(!scanner.hasNext()){
+            System.exit(1);
+        }
+        s = scanner.nextLine();
+        s=s.replace(" ","");
+        s=s.replace("\t","");
+        if(!(s.trim().equals("}"))){
+            System.exit(1);
+        }
+        System.out.println("}");
     }
-    public static void judgeAll(String in){
-        if(in.length()==0)
-            return;
-        if(in.replace(" ", "").equals(""))
-            return;
-        if(in.replace("\t", "").equals(""))
-            return;
-        while(in.charAt(0)==' '||in.charAt(0)=='\t'||in.charAt(0)=='\n'){
-            if(in.length()<=1)
-                break;
-            in=in.substring(1);
-        }
-        if(Character.isDigit(in.charAt(0))){
-            judgeNumber(in);
-        }
-        else if(Character.isLetter(in.charAt(0))||in.charAt(0)=='_'){
-            judgeWord(in);
+    public static boolean judgeNumber(String in){
+        in=in.trim();
+        if(in.charAt(0)=='0'){
+            if(in.length()>1&&(in.charAt(1)=='x'||in.charAt(1)=='X')){
+                for(int i=0;i<in.length()-1;i++){
+                    if(!(Character.isDigit(in.charAt(i))||(in.charAt(i)>='a'&&in.charAt(i)<='f')||(in.charAt(i)>='A'&&in.charAt(i)<='F'))){
+                        return false;
+                    }
+                }
+            }
+            else {
+                for(int i=0;i<in.length()-1;i++){
+                    if(!((in.charAt(i)>='0'&&in.charAt(i)<='7'))){
+                        return false;
+                    }
+                }
+            }
         }
         else {
-            judgeOther(in);
-        }
-    }
-    public static void judgeNumber(String in){
-        int i=0;
-        for(;i<in.length();i++){
-            if(!Character.isDigit(in.charAt(i))){
-                break;
+            for(int i=0;i<in.length()-1;i++){
+                if(!(Character.isDigit(in.charAt(i)))){
+                    return false;
+                }
             }
         }
-        String out = in.substring(0,i);
-        System.out.println("Number("+out+")");
-        if(i<=in.length()-1){
-            String temp = in.substring(i);
-            judgeAll(temp.trim());
-        }
-    }
-    public static void judgeWord(String in){
-        int i=0;
-        for(;i<in.length();i++){
-            if(!(Character.isLetter(in.charAt(i))||in.charAt(i)=='_'||Character.isDigit(in.charAt(i)))){
-                break;
-            }
-        }
-        String out = in.substring(0,i);
-
-        if(out.equals("if")){
-            System.out.println("If");
-        }
-        else if(out.equals("else")){
-            System.out.println("Else");
-        }
-        else if(out.equals("while")){
-            System.out.println("While");
-        }
-        else if(out.equals("break")){
-            System.out.println("Break");
-        }
-        else if(out.equals("continue")){
-            System.out.println("Continue");
-        }
-        else if(out.equals("return")){
-            System.out.println("Return");
-        }
-        else{
-            System.out.println("Ident("+out+")");
-        }
-        if(i<=in.length()-1){
-            String temp = in.substring(i);
-            judgeAll(temp.trim());
-        }
-    }
-    public static void judgeOther(String in){
-        if(in.startsWith("==")){
-            System.out.println("Eq");
-            if(in.length()>2)
-                judgeAll(in.substring(2).trim());
-        }
-        else if(in.charAt(0)=='='){
-            System.out.println("Assign");
-            if(in.length()>1)
-                judgeAll(in.substring(1).trim());
-        }
-        else if(in.charAt(0)==';'){
-            System.out.println("Semicolon");
-            if(in.length()>1)
-                judgeAll(in.substring(1).trim());
-        }
-        else if(in.charAt(0)=='('){
-            System.out.println("LPar");
-            if(in.length()>1)
-                judgeAll(in.substring(1).trim());
-        }
-        else if(in.charAt(0)==')'){
-            System.out.println("RPar");
-            if(in.length()>1)
-                judgeAll(in.substring(1).trim());
-        }
-        else if(in.charAt(0)=='{'){
-            System.out.println("LBrace");
-            if(in.length()>1)
-                judgeAll(in.substring(1).trim());
-        }
-        else if(in.charAt(0)=='}'){
-            System.out.println("RBrace");
-            if(in.length()>1)
-                judgeAll(in.substring(1).trim());
-        }
-        else if(in.charAt(0)=='+'){
-            System.out.println("Plus");
-            if(in.length()>1)
-                judgeAll(in.substring(1).trim());
-        }
-        else if(in.charAt(0)=='*'){
-            System.out.println("Mult");
-            if(in.length()>1)
-                judgeAll(in.substring(1).trim());
-        }
-        else if(in.charAt(0)=='/'){
-            System.out.println("Div");
-            if(in.length()>1)
-                judgeAll(in.substring(1).trim());
-        }
-        else if(in.charAt(0)=='>'){
-            System.out.println("Gt");
-            if(in.length()>1)
-                judgeAll(in.substring(1).trim());
-        }
-        else if(in.charAt(0)=='<'){
-            System.out.println("Lt");
-            if(in.length()>1)
-                judgeAll(in.substring(1).trim());
-        }
-        else {
-            System.out.println("Err");
-            System.exit(0);
-        }
+        return in.charAt(in.length() - 1) == ';';
     }
 }
